@@ -4,6 +4,6 @@ A full-stack application to track and visualize Energy Performance Certificates 
 
 ## Tech Stack
 * **Backend:** Node.js, Express.js
-* **Database:** MySQL, Sequelize ORM
+* **Database:** PostgreSQL, Sequelize ORM
 * **Frontend:** Handlebars.js, Bootstrap
 * **API:** UK Government EPC Register API
