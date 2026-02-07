@@ -1,0 +1,32 @@
+[
+  {
+    "address": "10 Downing Street",
+    "postcode": "SW1A 2AA",
+    "current_rating": "D",
+    "user_id": 1
+  },
+  {
+    "address": "15 Baker Street",
+    "postcode": "NW1 6XE",
+    "current_rating": "C",
+    "user_id": 1
+  },
+  {
+    "address": "Buckingham Palace",
+    "postcode": "SW1A 1AA",
+    "current_rating": "E",
+    "user_id": 2
+  },
+  {
+    "address": "221B Baker Street",
+    "postcode": "NW1 6XE",
+    "current_rating": "D",
+    "user_id": 2
+  },
+  {
+    "address": "1 High Street",
+    "postcode": "OX1 4JJ",
+    "current_rating": "B",
+    "user_id": 1
+  }
+]
