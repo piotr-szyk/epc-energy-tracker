@@ -1,14 +1,13 @@
 module.exports = {
-  get_emoji: () => {
-    const randomNum = Math.random();
-    let book = "📗";
-
-    if (randomNum > 0.7) {
-      book = "📘";
-    } else if (randomNum > 0.4) {
-      book = "📙";
-    }
-
-    return `<span for="img" aria-label="book">${book}</span>`;
+  format_date: (date) => {
+    // Format date as MM/DD/YYYY
+    return date.toLocaleDateString();
   },
+  // This helper will return a CSS class name based on the energy rating
+  get_rating_color: (rating) => {
+    const r = rating.toUpperCase();
+    if (['A', 'B'].includes(r)) return 'text-success'; // Green
+    if (['C', 'D'].includes(r)) return 'text-warning'; // Yellow/Orange
+    return 'text-danger'; // Red for E, F, G
+  }
 };
