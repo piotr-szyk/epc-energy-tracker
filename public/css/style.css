@@ -315,3 +315,126 @@ body {
   margin: 0;
   color: var(--muted);
 }
+
+
+/* Container for the whole EPC block */
+.epc-container {
+  display: grid;
+  grid-template-columns: 160px 55px 55px; /* Bars | Current | Potential */
+  gap: 4px;
+  align-items: center;
+  margin: 15px 0;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+/* Header for the labels */
+.epc-header-row {
+  display: contents; /* Let headers align with the grid columns */
+}
+
+.epc-header-item {
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+.epc-row-wrapper {
+  display: contents; 
+}
+
+/* The Color Bars */
+.epc-bar {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  color: white;
+  font-weight: 800;
+  font-size: 10px;
+  padding-left: 8px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Official EPC Widths */
+.bar-A { background: #008054; width: 35%; }
+.bar-B { background: #19b459; width: 45%; }
+.bar-C { background: #87c139; width: 55%; }
+.bar-D { background: #ffd21e; width: 65%; color: #000 !important; text-shadow: none !important; }
+.bar-E { background: #ffa200; width: 75%; }
+.bar-F { background: #ff5e00; width: 85%; }
+.bar-G { background: #df1f12; width: 95%; }
+
+/* Score Highlight Boxes (The "Current" and "Potential" indicators) */
+.score-box {
+  height: 22px;
+  width: 45px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 11px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03); /* Default empty state */
+  color: var(--muted);
+}
+
+/* Active Label Backgrounds */
+.label-A { background: #008054; color: white; box-shadow: 0 2px 8px rgba(0, 128, 84, 0.4); }
+.label-B { background: #19b459; color: white; box-shadow: 0 2px 8px rgba(25, 180, 89, 0.4); }
+.label-C { background: #87c139; color: white; box-shadow: 0 2px 8px rgba(135, 193, 57, 0.4); }
+.label-D { background: #ffd21e; color: #000; box-shadow: 0 2px 8px rgba(255, 210, 30, 0.4); }
+.label-E { background: #ffa200; color: white; box-shadow: 0 2px 8px rgba(255, 162, 0, 0.4); }
+.label-F { background: #ff5e00; color: white; box-shadow: 0 2px 8px rgba(255, 94, 0, 0.4); }
+.label-G { background: #df1f12; color: white; box-shadow: 0 2px 8px rgba(223, 31, 18, 0.4); }
+
+/* Recommendations Styling */
+.recommendations-box {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 12px;
+}
+
+.rec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.rec-table th {
+  text-align: left;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+}
+
+.rec-table td {
+  padding: 8px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Column specific widths for the recommendations table */
+.rec-table td:first-child {
+  width: 70%;
+  padding-right: 15px;
+  line-height: 1.4;
+}
+
+.rec-table td:last-child {
+  width: 30%;
+  text-align: right;
+  white-space: nowrap;
+  font-family: 'Courier New', Courier, monospace; /* Makes numbers line up nicely */
+  color: #4ade80; /* A soft green to highlight the costs */
+}

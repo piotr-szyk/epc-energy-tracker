@@ -20,13 +20,29 @@ Favorite.init(
       allowNull: false,
     },
     current_rating: {
-      type: DataTypes.STRING(1), // Stores 'A', 'B', 'C', etc.
+      type: DataTypes.STRING, 
+      allowNull: true,
     },
-    // The foreign key that connects to the User model
+    current_score: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    potential_rating: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    potential_score: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    lmk_key: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'users',
+        model: 'users', 
         key: 'id',
       },
     },

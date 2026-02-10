@@ -1,19 +1,19 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { Favorite } = require('../models'); 
 
 router.get('/', async (req, res) => {
   try {
-    // Get all users, sorted by name
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
+    // 1. Get all favorites from the database
+    const favoriteData = await Favorite.findAll();
+
+    // 2. Serialize data so Handlebars can use it
+    const favorites = favoriteData.map((fav) => fav.get({ plain: true }));
+
+    // 3. Render 'homepage' and pass the favorites array
+    res.render('homepage', { 
+      favorites,
+      // logged_in: req.session.logged_in (We can add this later)
     });
-
-    // Serialize user data so templates can read it
-    const users = userData.map((project) => project.get({ plain: true }));
-
-    // Pass serialized data into Handlebars.js template
-    res.render('homepage', { users });
   } catch (err) {
     res.status(500).json(err);
   }
