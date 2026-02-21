@@ -25,6 +25,22 @@ const searchHandler = async (event) => {
 
 const saveFavoriteHandler = async (event) => {
   const btn = event.target;
+  
+  // 1. Find the parent row so we can look for the recommendation table inside it
+  const row = btn.closest('.list__row');
+  
+  // 2. Capture the recommendations from the table rows
+  const recRows = row.querySelectorAll('.rec-table tbody tr');
+  const recommendations = Array.from(recRows)
+    // Filter out the "No specific recommendations found" message if it exists
+    .filter(tr => !tr.querySelector('.muted'))
+    .map(tr => {
+      return {
+        'improvement-descr-text': tr.cells[0].innerText.trim(),
+        'indicative-cost': tr.cells[1].innerText.trim()
+      };
+    });
+
   const propertyData = {
     address: btn.getAttribute('data-address'),
     postcode: btn.getAttribute('data-postcode'),
@@ -32,7 +48,8 @@ const saveFavoriteHandler = async (event) => {
     current_score: btn.getAttribute('data-score'),
     potential_rating: btn.getAttribute('data-pot-rating'),
     potential_score: btn.getAttribute('data-pot-score'),
-    lmk_key: btn.getAttribute('data-lmk')
+    lmk_key: btn.getAttribute('data-lmk'),
+    recommendations: recommendations
   };
 
   try {
@@ -41,10 +58,12 @@ const saveFavoriteHandler = async (event) => {
       body: JSON.stringify(propertyData),
       headers: { 'Content-Type': 'application/json' },
     });
+    
     if (response.ok) {
       btn.innerText = 'Saved! ✅';
       btn.classList.replace('btn--primary', 'btn--success');
       btn.disabled = true;
+      // Brief delay before reload so the user sees the success state
       setTimeout(() => location.reload(), 1000);
     }
   } catch (err) {

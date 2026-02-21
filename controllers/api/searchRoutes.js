@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const axios = require('axios');
 const encodeAPIKey = require('../../utils/epc-auth');
-const { Favorite, User } = require('../../models');
+// ADD Recommendation to the import list!
+const { Favorite, User, Recommendation } = require('../../models');
 
-// 1. POST Search - Fetch from Gov API + Recommendations
+// 1. POST Search - (Remains the same)
 router.post('/', async (req, res) => {
   try {
     const { postcode } = req.body;
@@ -12,11 +13,9 @@ router.post('/', async (req, res) => {
       'Accept': 'application/json'
     };
 
-    // Fetch properties
     const response = await axios.get(`https://epc.opendatacommunities.org/api/v1/domestic/search?postcode=${postcode}`, { headers: authHeader });
     const properties = response.data.rows;
 
-    // Fetch recommendations for each property (limiting to top 10 for performance)
     const enhancedProperties = await Promise.all(properties.slice(0, 10).map(async (prop) => {
       try {
         const recRes = await axios.get(`https://epc.opendatacommunities.org/api/v1/domestic/recommendations/${prop['lmk-key']}`, { headers: authHeader });
@@ -33,10 +32,9 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 2. POST Save - Now handles ALL new fields + ensures User exists
+// 2. POST Save - UPDATED to handle Recommendation mapping
 router.post('/save', async (req, res) => {
   try {
-    // FIX: This prevents the "user_id 1 not present" crash!
     await User.findOrCreate({
       where: { id: 1 },
       defaults: {
@@ -46,6 +44,13 @@ router.post('/save', async (req, res) => {
       }
     });
 
+    // We take the recommendations array from the frontend and map it
+    // to match our Recommendation model column names (description, indicative_cost)
+    const recommendationData = req.body.recommendations ? req.body.recommendations.map(rec => ({
+      description: rec['improvement-descr-text'],
+      indicative_cost: rec['indicative-cost']
+    })) : [];
+
     const newFav = await Favorite.create({
       address: req.body.address,
       postcode: req.body.postcode,
@@ -54,8 +59,14 @@ router.post('/save', async (req, res) => {
       potential_rating: req.body.potential_rating,
       potential_score: req.body.potential_score,
       lmk_key: req.body.lmk_key,
-      user_id: 1 
+      user_id: 1,
+      // Pass the mapped array here
+      recommendations: recommendationData 
+    }, {
+      // VITAL: This tells Sequelize to create records in the Recommendation table too
+      include: [Recommendation] 
     });
+
     res.status(200).json(newFav);
   } catch (err) {
     console.error('Save Error:', err);

@@ -44,30 +44,58 @@
         </div>
 
         <div class="fav-details" style="display: none; margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 20px;">
-          <div style="max-width: 300px;">
-            <div class="epc-container" style="margin: 0;">
-              <div class="epc-header-row">
-                <div style="text-align: left; font-size: 9px;">RATING</div>
-                <div style="text-align: center; font-size: 9px;">NOW</div>
-                <div style="text-align: center; font-size: 9px;">POT.</div>
-              </div>
-
-              {{#each (split "A,B,C,D,E,F,G")}}
-                <div class="epc-row-wrapper">
-                  <div class="epc-bar bar-{{this}}">{{this}}</div>
-                  
-                  <div class="score-box {{#if (eq ../current_rating this)}}label-{{this}}{{/if}}">
-                    {{#if (eq ../current_rating this)}} {{../current_score}} {{/if}}
-                  </div>
-
-                  <div class="score-box {{#if (eq ../potential_rating this)}}label-{{this}}{{/if}}">
-                    {{#if (eq ../potential_rating this)}} {{../potential_score}} {{/if}}
-                  </div>
+          <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+            
+            <div style="max-width: 300px;">
+              <div class="epc-container" style="margin: 0;">
+                <div class="epc-header-row">
+                  <div style="text-align: left; font-size: 9px;">RATING</div>
+                  <div style="text-align: center; font-size: 9px;">NOW</div>
+                  <div style="text-align: center; font-size: 9px;">POT.</div>
                 </div>
-              {{/each}}
+
+                {{#each (split "A,B,C,D,E,F,G")}}
+                  <div class="epc-row-wrapper">
+                    <div class="epc-bar bar-{{this}}">{{this}}</div>
+                    
+                    <div class="score-box {{#if (eq ../current_rating this)}}label-{{this}}{{/if}}">
+                      {{#if (eq ../current_rating this)}} {{../current_score}} {{/if}}
+                    </div>
+
+                    <div class="score-box {{#if (eq ../potential_rating this)}}label-{{this}}{{/if}}">
+                      {{#if (eq ../potential_rating this)}} {{../potential_score}} {{/if}}
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
             </div>
+
+            <div style="flex: 1; min-width: 300px;">
+              <h4 style="margin-top: 0; font-size: 0.9rem; color: var(--text);">Saved Recommendations</h4>
+              <table class="rec-table">
+                <thead>
+                  <tr>
+                    <th>Improvement</th>
+                    <th style="text-align: right;">Indicative Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each this.recommendations}}
+                    <tr>
+                      <td>{{this.description}}</td>
+                      <td style="text-align: right;">{{this.indicative_cost}}</td>
+                    </tr>
+                  {{else}}
+                    <tr>
+                      <td colspan="2" class="muted">No recommendations saved for this property.</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <p class="muted" style="margin-top: 15px; font-size: 11px;">Certificate Key: {{this.lmk_key}}</p>
+            </div>
+
           </div>
-          <p class="muted" style="margin-top: 15px; font-size: 11px;">Certificate Key: {{this.lmk_key}}</p>
         </div>
       </div>
     {{/each}}
