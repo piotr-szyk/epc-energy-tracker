@@ -39,13 +39,14 @@ The application uses a relational schema to ensure data integrity:
 The application uses Sequelize sync. On first run, the server will create the users, favorite, and recommendation tables automatically.
 
 Bash
-# Ensure sequelize.sync({ alter: true }) is set in server.js for the first run
-node server.js
+Ensure sequelize.sync({ alter: true }) is set in server.js for the first run
+
+`node server.js`
 
 5. Start the Application:
 
 Bash
-npm start
+`npm start`
 
 🔮 Future Enhancements
 Cost Comparison: Adding a calculator to estimate total savings based on implemented recommendations.
@@ -55,4 +56,4 @@ Map Integration: Visualizing property locations using the Google Maps API.
 Admin Dashboard: Tools to view aggregated energy trends across different postcodes.
 
 🛡️ License
-Distributed under the MIT License. See LICENSE for more information.
+Distributed under the MIT License. 
