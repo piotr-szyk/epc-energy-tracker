@@ -438,3 +438,49 @@ body {
   font-family: 'Courier New', Courier, monospace; /* Makes numbers line up nicely */
   color: #4ade80; /* A soft green to highlight the costs */
 }
+
+/* 1. Pulse Animation for Loading States */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.is-searching {
+  animation: pulse 1.5s infinite ease-in-out;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* 2. Empty State Styling */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state__icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.empty-state__text {
+  color: var(--muted);
+  max-width: 300px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* 3. Interactive Feedback for the Search Form */
+.search-form .input:focus {
+  outline: none;
+  border-color: rgba(125, 211, 252, 0.5);
+  box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.1);
+}
+
+/* 4. Score-box hover effect for the saved list */
+.list__row:hover .score-box[class*="label-"] {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+

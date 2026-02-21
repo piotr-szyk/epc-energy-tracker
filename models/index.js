@@ -1,15 +1,27 @@
 const User = require('./User');
 const Favorite = require('./Favorite');
+const Recommendation = require('./Recommendation');
 
-// A User can have many Favorite properties
+// 1. User <-> Favorite Relationship
 User.hasMany(Favorite, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
 
-// Each Favorite belongs to a single User
 Favorite.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-module.exports = { User, Favorite };
+// 2. Favorite <-> Recommendation Relationship
+// A Favorite property can have many recommendations
+Favorite.hasMany(Recommendation, {
+  foreignKey: 'favorite_id',
+  onDelete: 'CASCADE'
+});
+
+// Each Recommendation belongs to a specific Favorite property
+Recommendation.belongsTo(Favorite, {
+  foreignKey: 'favorite_id'
+});
+
+module.exports = { User, Favorite, Recommendation };
