@@ -1,59 +1,43 @@
 # 🏠 EPC Energy Tracker
 
-A full-stack web application that allows users to search for UK Energy Performance Certificates (EPC) and save properties to a personal dashboard with tailored energy-saving recommendations.
+A full-stack MVC application that empowers users to search, track, and analyze UK Energy Performance Certificates (EPC). This project demonstrates a complete integration of a Node/Express backend with a PostgreSQL relational database.
+
+![Difficulty: Advanced](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
+![Topic: Full Stack MVC](https://img.shields.io/badge/Topic-Full_Stack_MVC-purple?style=for-the-badge)
+![Database: PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue?style=for-the-badge)
+
+---
+
+## 🎯 Project Goal
+To transform raw government data into a personalized dashboard. Users can search properties using the official UK Government API, save them to a private profile, and receive tailored energy-saving recommendations based on real property metrics.
 
 ## 🚀 Live Demo
 [View the App on Render](https://epc-energy-tracker.onrender.com/)
 
+## 🛠️ Technical Implementation
+This project showcases a professional-grade full-stack workflow:
+
+* **MVC Architecture:** Organized using the Model-View-Controller pattern to ensure scalable and maintainable code.
+* **Relational Database:** Designed with **PostgreSQL** and **Sequelize ORM**, implementing One-to-Many relationships between users, saved properties, and energy recommendations.
+* **Secure Authentication:** User sessions are managed via `express-session` with password encryption using `bcrypt`.
+* **RESTful API Integration:** Server-side fetching of real-time data from the Department for Levelling Up, Housing and Communities API.
+* **Dynamic Templating:** Utilizing **Handlebars.js** to render logic-heavy views on the server side.
+
 ## ✨ Key Features
-* **UK Gov API Integration:** Fetches real-time energy data using the Department for Levelling Up, Housing and Communities API.
-* **Relational Data Mapping:** Implements a One-to-Many relationship between saved properties and their specific energy improvement recommendations.
-* **Dynamic UI:** Built with Handlebars.js and custom CSS for a modern, high-contrast Energy Rating visualization.
-* **User Authentication:** Secure login system using Express-Session and BCrypt for password hashing.
+- **Real-time Search:** Access official UK energy data instantly.
+- **Personal Dashboard:** Save properties and track energy ratings (A-G).
+- **Intelligent Recommendations:** Dynamically pulls home improvement suggestions for every saved property.
+- **Responsive Design:** A custom CSS interface optimized for data clarity and mobile accessibility.
 
-## 🛠️ Tech Stack
-* **Backend:** Node.js, Express.js
-* **Database:** PostgreSQL, Sequelize ORM
-* **Frontend:** Handlebars.js, Vanilla JavaScript, CSS3
-* **Deployment:** Render (Web Service + Managed PostgreSQL)
+## 📂 Structure
+- `models/`: Database schemas and associations (Sequelize).
+- `views/`: Handlebars templates for the UI.
+- `controllers/`: Express routes and business logic.
+- `public/`: Client-side assets (CSS, Vanilla JS).
+- `server.js`: The entry point for the Express server and DB synchronization.
 
-## 🏗️ Database Architecture
-The application uses a relational schema to ensure data integrity:
-- **Users**: Manages account credentials.
-- **Favorites**: Stores property details (Address, Rating, Scores).
-- **Recommendations**: Linked to Favorites via `favorite_id` to provide specific home improvement data.
-
-## ⚙️ Installation & Setup
-1. Clone the repository.
-2. Run `npm install`.
-3. Create a `.env` file with:
-   ```env
-   DB_NAME=epc_db
-   DB_USER=your_user
-   DB_PASSWORD=your_password
-   EPC_API_KEY=your_key
-   EPC_API_EMAIL=your_email
-   SESSION_SECRET=your_secret
-
-4. Initialize the Database:
-The application uses Sequelize sync. On first run, the server will create the users, favorite, and recommendation tables automatically.
-
-Bash
-Ensure sequelize.sync({ alter: true }) is set in server.js for the first run
-
-`node server.js`
-
-5. Start the Application:
-
-Bash
-`npm start`
-
-🔮 Future Enhancements
-Cost Comparison: Adding a calculator to estimate total savings based on implemented recommendations.
-
-Map Integration: Visualizing property locations using the Google Maps API.
-
-Admin Dashboard: Tools to view aggregated energy trends across different postcodes.
-
-🛡️ License
-Distributed under the MIT License. 
+## ⚙️ Installation
+1. Clone the repo.
+2. Install dependencies: `npm install`.
+3. Configure your `.env` (see `.env.EXAMPLE`).
+4. Initialize the DB and start: `npm start`.
